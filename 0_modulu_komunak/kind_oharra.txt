@@ -1,0 +1,8 @@
+Programa nagusian mcf_tipos modulua kargatzen da.
+Hau, Metodo Konputazionalak irakasgaian erabili genuen.
+Moduluan hurrengo lerroak agertzen dira:
+
+integer, parameter, public :: double = selected_real_kind(14)
+integer, parameter, public :: dp = double
+
+Honek, zenbaki errealen zehaztasuna handitzen du.
