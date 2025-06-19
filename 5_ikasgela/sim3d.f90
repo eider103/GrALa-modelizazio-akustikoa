@@ -5,16 +5,16 @@ use m_mb
 use m_oinarria
 use m_datuak
 
-integer,parameter		::n=400,unit=1
-integer										::i,j,k,iz0,kontagailua,itx,ity,itz
+integer,parameter				::n=400,unit=1
+integer						::i,j,k,iz0,kontagailua,itx,ity,itz
 real(kind=dp),dimension(:,:,:),allocatable	::p_orain,p_berria,u_orain,u_berria,v_orain,v_berria,w_orain,w_berria
-real(kind=dp)								::rho,rv,rp,x,y,tau,t,pt,L,kont_max
-real(kind=dp)								::zn_leiho,zn_arbela,zn_zura,zn_horma,zn_lurra,zn_sabaia,zn_ikasle
-integer,dimension(habe_px,3)::oix
-integer,dimension(habe_py,3)::oiy
-integer,dimension(habe_px)::xix,yix
-integer,dimension(habe_py)::xiy,yiy
-integer	::iLz
+real(kind=dp)					::rho,rv,rp,x,y,tau,t,pt,L,kont_max
+real(kind=dp)					::zn_leiho,zn_arbela,zn_zura,zn_horma,zn_lurra,zn_sabaia,zn_ikasle
+integer,dimension(habe_px,3)	::oix
+integer,dimension(habe_py,3)	::oiy
+integer,dimension(habe_px)	::xix,yix
+integer,dimension(habe_py)	::xiy,yiy
+integer				::iLz
 
 call L_topatu(L,Lx,Ly,Lz) !luzera handiena topatu
 
@@ -31,7 +31,6 @@ print*,"h=",h
 
 call neurketak(c,nu,h,tau)	!neurketa nahikoa egiten ari dela egiaztatu
 
-!bektore bat eraiki nezake materialekin, eta funtzio baten bidez kalkulatu zn
 zn_leiho=rho*c*(1.0_dp+sqrt(1.0_dp-alpha_leiho))/(1.0_dp-sqrt(1.0_dp-alpha_leiho))
 zn_arbela=rho*c*(1.0_dp+sqrt(1.0_dp-alpha_arbela))/(1.0_dp-sqrt(1.0_dp-alpha_arbela))
 zn_zura=rho*c*(1.0_dp+sqrt(1.0_dp-alpha_zura))/(1.0_dp-sqrt(1.0_dp-alpha_zura))
@@ -171,7 +170,7 @@ end do
 	do i=1,habe_py
 		call mb_p_oztopo(p_berria,u_orain,v_orain,w_orain,zn_sabaia,oiy(i,1),oiy(i,2),oiy(i,3),xiy(i),yiy(i),iLz)
 	end do
-	do i=1,3	!oholtza,kutxa,irakasle
+	do i=1,3	!oholtza, it kutxa, irakaslearen mahaia
 			call mb_p_oztopo(p_berria,u_orain,v_orain,w_orain,zn_zura,ind(obloke(i,1)),ind(obloke(i,2)),ind(obloke(i,3)),ind(xbloke(i)),ind(ybloke(i)),ind(zbloke(i)))
 	end do
 	do i=4,6	!ikasleen mahaiak
@@ -207,7 +206,7 @@ end do
 
 	do i=1,nx
 		do j=1,ny
-			do k=1,nz	!indizeetan -1 kendu det
+			do k=1,nz	
 				if (oztoporik(i,j,k)==1) then
 					u_berria(i,j,k)=u_orain(i,j,k)-rv*(p_berria(i,j,k)-p_berria(i-1,j,k))		 !benetako i koordenatua i+0.5
 					v_berria(i,j,k)=v_orain(i,j,k)-rv*(p_berria(i,j,k)-p_berria(i,j-1,k))
@@ -237,7 +236,7 @@ end do
 	do i=1,habe_py
 		call mb_u_oztopo(p_berria,u_berria,v_berria,w_berria,zn_sabaia,oiy(i,1),oiy(i,2),oiy(i,3),xiy(i),yiy(i),iLz)
 	end do
-	do i=1,3	!oholtza, kutxa,irakasle
+	do i=1,3	!oholtza, it kutxa, irakaslearen mahaia
 		call mb_u_oztopo(p_berria,u_berria,v_berria,w_berria,zn_zura,ind(obloke(i,1)),ind(obloke(i,2)),ind(obloke(i,3)),ind(xbloke(i)),ind(ybloke(i)),ind(zbloke(i)))
 	end do
 	do i=4,6	!ikasleen mahaiak
@@ -271,7 +270,7 @@ end do
 contains
 
 function p(t) result(pres)
-	real(kind=dp),intent(in)	::t
+	real(kind=dp),intent(in)::t
 	real(kind=dp)		::pres
 	real(kind=dp),parameter	::pi=acos(-1.0_dp)
 	pres=P0*cos(2.0_dp*pi*nu*t)
