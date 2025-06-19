@@ -57,6 +57,6 @@ GrALa-modelizazio-akustikoa
 ## 👩‍🎓 Egilea
 
 **Eider Sanchez Nuin**  
-📌 **GitHub**: [eidersn](https://github.com/eidersn)  
+📌 **GitHub**: [eider103](https://github.com/eider103)  
 📧 **Kontaktua**: [esanchez103@ikasle.ehu.eus](mailto:esanchez103@ikasle.ehu.eus)  
-🏛️ **Lotura instituzionala**: Zientzia eta Teknologia Fakultatea, EHU/UPV
+🏛️ **Lotura instituzionala**: Zientzia eta Teknologia Fakultatea, EHU
